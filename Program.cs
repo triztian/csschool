@@ -21,14 +21,13 @@ namespace School
                 try
                 {
 
-                    students.Add( Util.Console.CreateStudent() );
+                    students.Add( Util.Console.ReadStudent() );
 
                     Console.WriteLine("Student Count: {0}", Student.Count);
 
                     Console.WriteLine("Add another? y/n");
 
-                    if ( Console.ReadLine() != "y" ) 
-                        adding = false;
+                    adding = Console.ReadLine() == "y";
                 }
                 catch (FormatException msg)
                 {
@@ -57,23 +56,10 @@ namespace School
 
         static void Exports()
         {
+            // TODO: Properly define what "Exports" does ...
             foreach (var student in students)
             {
-                switch (student.SchoolType)
-                {
-                    case SchoolType.Public:
-                        Console.WriteLine("Public");
-                        break;
-                    case SchoolType.Private:
-                        Console.WriteLine("Private");
-                        break;
-                    case SchoolType.Foreign:
-                        Console.WriteLine("Foreign");
-                        break;
-                    default:
-                        Console.WriteLine("Please enter number between 0, 1, 2");
-                        break;
-                }
+                Console.WriteLine("--- \n {0}", student.SchoolType.ToString());
             }
         }
     }

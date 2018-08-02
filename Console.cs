@@ -10,13 +10,13 @@ namespace Util
     {
         private const string Message = "Input was not a number";
 
-        static public string Ask(string question)
+        public static string Ask(string question)
         {
             System.Console.Write( question );
             return System.Console.ReadLine();
         }
 
-        static public int AskInt(string question)
+        public static int AskInt(string question)
         { 
             System.Console.Write( question );
 
@@ -28,24 +28,18 @@ namespace Util
             throw new FormatException( Message );
         }
 
-        static public int AskSchool(string answer)
+        public static SchoolType AskSchool(string prompt)
         {
-            var schoolFlag = true;
-            int result = 0;
-            while(schoolFlag)
+            var nSchoolType = -1;
+            do 
             {
-               System.Console.Write( answer ); 
-                if (int.Parse(System.Console.ReadLine()) < 3)
-                {
-                    schoolFlag = false;
-                    result = int.Parse( System.Console.ReadLine() );
-                }
-                return result;
-            }
-            return result;
+                nSchoolType = AskInt(prompt);
+            } while(!Enum.IsDefined(typeof(SchoolType), nSchoolType));
+
+            return (SchoolType)nSchoolType;
         }
 
-        public static Student CreateStudent() 
+        public static Student ReadStudent() 
         {
             var student = new Student();
 
@@ -55,7 +49,7 @@ namespace Util
 
             student.Grade = Util.Console.AskInt("Student Grade: ");
 
-            student.SchoolType = (SchoolType) Util.Console.AskSchool("School Attended: \n0 - Public \n1 - Private \n2 - Foreign \n\t"); 
+            student.SchoolType = (SchoolType) Util.Console.AskSchool("School Attended: \n0 - Public \n1 - Private \n2 - Foreign \n"); 
 
             student.Birthday = Util.Console.Ask("Student Birthday: ");
 
