@@ -14,20 +14,15 @@ namespace School
         {
             Import();
 
-            var adding = true;
-
-            while (adding)
+            do 
             {
                 try
                 {
-
                     students.Add( Util.Console.ReadStudent() );
 
                     Console.WriteLine("Student Count: {0}", Student.Count);
 
                     Console.WriteLine("Add another? y/n");
-
-                    adding = Console.ReadLine() == "y";
                 }
                 catch (FormatException msg)
                 {
@@ -37,7 +32,7 @@ namespace School
                 {
                     Console.WriteLine("Error Adding Student, Please Try Again.");
                 }
-            }
+            } while(Console.ReadLine() == "y");
 
             foreach ( var student in students )
             {
